@@ -10,7 +10,7 @@ body {
     margin: 0;
     background-color: #f0f2f5;
     color: #333;
-    overflow: hidden; /* Prevent scrollbar from appearing on screen transitions */
+    /*overflow: hidden;*/ /* Prevent scrollbar from appearing on screen transitions */
 }
 
 /* General hidden class for all elements that need to be hidden via JS */
