@@ -128,7 +128,7 @@ button:hover {
     color: #007bff;
     border: 1px solid #007bff;
     align-self: flex-start; /* Position it to the left */
-    /*margin-bottom: 20px;*/
+    margin-bottom: 20px;
     padding: 10px 15px;
     font-size: 0.9em;
     width: auto; /* Override 100% width from general button style */
