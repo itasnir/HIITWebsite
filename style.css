@@ -1,0 +1,335 @@
+html, body {
+    height: 100%; /* Ensure html and body take full viewport height */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background-color: #f0f2f5;
+    color: #333;
+    overflow: hidden; /* Prevent scrollbar from appearing on screen transitions */
+}
+
+/* General hidden class for all elements that need to be hidden via JS */
+.hidden {
+    display: none;
+    opacity: 0; /* Ensures it fades out */
+    transform: translateX(100%); /* Moves it off screen */
+    pointer-events: none; /* Crucial: Prevents clicks when hidden */
+}
+
+.screen {
+    width: 100%;
+    max-width: 450px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Removed justify-content: center from here, it will be applied on specific screens if needed */
+    height: 100%; /* Make screens fill vertical space */
+    position: absolute; /* Allows screens to overlap */
+    /* Apply all transitions here for smooth showing/hiding */
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    visibility: visible; /* Default state is visible */
+    transform: translateX(0); /* Default position */
+    opacity: 1; /* Default opacity */
+    pointer-events: auto; /* Default allows clicks */
+}
+
+/* When the hidden class is applied, specifically control visibility */
+.screen.hidden {
+    visibility: hidden; /* Hide element after transition */
+}
+
+
+#home-screen {
+    justify-content: center; /* Explicitly center content vertically for home screen */
+}
+
+#config-screen {
+    justify-content: flex-start; /* Align content to the top for config screen */
+    padding-top: 30px; /* Keep consistent top padding */
+}
+
+
+h1 {
+    color: #007bff;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+}
+
+h2 {
+    color: #007bff;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 80%;
+    max-width: 300px;
+    margin-top: 20px;
+}
+
+button {
+    padding: 15px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+.primary-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.primary-button:hover {
+    background-color: #0056b3;
+}
+
+.secondary-button {
+    background-color: #6c757d;
+    color: white;
+}
+
+.secondary-button:hover {
+    background-color: #5a6268;
+}
+
+.danger-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+.danger-button:hover {
+    background-color: #c82333;
+}
+
+.back-button {
+    background-color: transparent;
+    color: #007bff;
+    border: 1px solid #007bff;
+    align-self: flex-start; /* Position it to the left */
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    font-size: 0.9em;
+    width: auto; /* Override 100% width from general button style */
+    box-shadow: none;
+}
+
+.back-button:hover {
+    background-color: #e0f2ff;
+    transform: none;
+}
+
+.input-area {
+    width: 100%;
+    margin-top: 20px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    width: 80%;
+    max-width: 250px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.input-group input[type="number"],
+.input-group select { /* Added select to this rule */
+    width: calc(100% - 20px); /* Adjust for padding */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.1em;
+    -moz-appearance: textfield; /* Hide arrows for Firefox */
+}
+
+.input-group input::-webkit-outer-spin-button,
+.input-group input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; /* Hide arrows for Chrome, Safari, Edge */
+}
+
+/* Specific styles for workout plan display */
+#workout-plan-display-container {
+    width: 90%;
+    max-height: 200px; /* Limit height for scroll */
+    overflow-y: auto; /* Enable scrolling for long lists */
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+}
+
+#workout-plan-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+#workout-plan-list li {
+    background-color: #e6f7ff; /* Light blue background for list items */
+    border: 1px solid #cce7ff;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95em;
+    color: #333;
+}
+
+#workout-plan-list li .remove-segment-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 8px;
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: auto; /* Override general button width */
+    box-shadow: none;
+}
+
+#workout-plan-list li .remove-segment-btn:hover {
+    background-color: #c82333;
+    transform: none; /* Prevent translateY hover effect */
+}
+
+
+/* Adjustments for the active timer display screen */
+#active-timer-screen {
+    justify-content: flex-start;
+    padding: 15px;
+}
+
+
+.workout-display { /* This class is now primarily for the flex container behavior */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1; /* Allow it to take available space */
+}
+
+.countdown-clock {
+    font-size: 6em; /* Very prominent clock */
+    font-weight: bold;
+    color: #28a745; /* Green for go */
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.phase-indicator {
+    font-size: 2em;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.progress-indicator { /* This is now #total-progress-bar */
+    width: 90%;
+    height: 15px;
+    background-color: #e9ecef;
+    border-radius: 8px;
+    margin-top: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: #007bff;
+    width: 0%;
+    border-radius: 8px;
+    transition: width 0.5s linear;
+}
+
+/* Modal styles */
+.modal-overlay {
+    position: fixed; /* Keep fixed to overlay the entire screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none; /* Crucially, hide it by default */
+    justify-content: center; /* Center horizontally */
+    align-items: center;   /* Center vertically */
+    z-index: 1000;
+    transition: background-color 0.3s ease-out;
+}
+
+.modal-overlay.visible {
+    display: flex; /* Show the overlay when 'visible' class is added */
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px; /* Consistent padding */
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    
+    width: calc(100% - 40px); /* Take 100% of parent width minus 20px margin on each side (total 40px) */
+    max-width: 400px; /* Caps the maximum width on larger screens */
+    box-sizing: border-box; /* Crucial: padding is included within the width */
+    
+    transform: translateY(-20px); /* Keep initial translateY for fade-in effect */
+    opacity: 0; /* Start invisible */
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out; /* Smooth transitions for content */
+}
+
+.modal-overlay.visible .modal-content {
+    transform: translateY(0); /* Move into place */
+    opacity: 1; /* Fade in */
+}
+
+/* Make modal buttons look like normal buttons, but contained */
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px; /* Add some space above buttons */
+}
+
+.modal-buttons button {
+    width: 120px;
+    padding: 10px 15px;
+    font-size: 1em;
+    box-shadow: none; /* Remove duplicate shadow */
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIIT Workout Timer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Screen 1: Home/Main Menu -->
+    <div id="home-screen" class="screen">
+        <h1>HIIT Workout Timer</h1>
+        <div class="button-group">
+            <button id="interval-timer-btn">Interval Timer</button>
+            <button id="workout-plan-btn">Workout Plan Creator</button>
+        </div>
+    </div>
+
+    <!-- Screen 2: Interval Configuration / Workout Plan Creator -->
+    <div id="config-screen" class="screen hidden">
+        <button id="back-to-home-btn" class="back-button">Back to Home</button>
+
+        <!-- Input Area for Interval Timer -->
+        <div id="interval-input-area" class="input-area">
+            <h2>Set Interval Timer</h2>
+            <div class="input-group">
+                <label for="work-seconds">Work Seconds:</label>
+                <input type="number" id="work-seconds" value="45" min="1">
+            </div>
+            <div class="input-group">
+                <label for="rest-seconds">Rest Seconds:</label>
+                <input type="number" id="rest-seconds" value="15" min="0">
+            </div>
+            <button id="start-interval-btn" class="primary-button">Start Interval</button>
+        </div>
+
+        <!-- Workout Plan Creator -->
+        <div id="workout-plan-creator-area" class="input-area hidden">
+            <h2>Create Workout Plan</h2>
+
+            <div class="input-group">
+                <label for="segment-type">Segment Type:</label>
+                <select id="segment-type">
+                    <option value="work-rest">Work/Rest Cycle</option>
+                    <option value="pure-rest">Pure Rest</option>
+                </select>
+            </div>
+
+            <!-- Work/Rest Cycle Inputs -->
+            <div id="work-rest-inputs">
+                <div class="input-group">
+                    <label for="segment-work-seconds">Work Seconds:</label>
+                    <input type="number" id="segment-work-seconds" value="30" min="1">
+                </div>
+                <div class="input-group">
+                    <label for="segment-rest-seconds">Rest Seconds:</label>
+                    <input type="number" id="segment-rest-seconds" value="10" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="segment-repetitions">Repetitions:</label>
+                    <input type="number" id="segment-repetitions" value="3" min="1">
+                </div>
+            </div>
+
+            <!-- Pure Rest Inputs -->
+            <div id="pure-rest-inputs" class="hidden">
+                <div class="input-group">
+                    <label for="pure-rest-seconds">Rest Duration (Seconds):</label>
+                    <input type="number" id="pure-rest-seconds" value="60" min="0">
+                </div>
+            </div>
+
+            <button id="add-segment-btn" class="secondary-button">Add Segment</button>
+
+            <div id="workout-plan-display-container">
+                <h3>Your Plan:</h3>
+                <ul id="workout-plan-list">
+                    <!-- Added segments will appear here -->
+                </ul>
+                <button id="clear-plan-btn" class="danger-button hidden">Clear Plan</button>
+            </div>
+
+            <button id="start-plan-btn" class="primary-button">Start Plan</button>
+        </div>
+    </div>
+
+    <!-- Screen 3: Active Workout Display -->
+    <div id="active-timer-screen" class="screen hidden">
+        <button id="back-from-timer-btn" class="back-button">End Workout</button>
+
+        <div id="current-segment-display" style="font-size: 1.1em; margin-bottom: 10px; color: #666;"></div>
+        <div id="current-phase" class="phase-indicator"></div>
+        <div id="countdown-clock" class="countdown-clock">00:00</div>
+        
+        <!-- Overall workout progress bar -->
+        <div id="total-progress-bar" class="progress-indicator">
+            <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <div id="progress-text" style="margin-top: 5px; font-size: 0.9em; color: #555;"></div>
+
+
+        <div class="button-group">
+            <button id="pause-resume-btn" class="secondary-button">Pause</button>
+            <button id="stop-workout-btn" class="danger-button">Stop Workout</button>
+        </div>
+    </div>
+
+    <!-- Custom Alert/Confirm Modal -->
+    <div id="custom-modal-overlay" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3 id="modal-title"></h3>
+            <p id="modal-message"></p>
+            <div class="modal-buttons">
+                <button id="modal-ok-btn" class="primary-button">OK</button>
+                <button id="modal-cancel-btn" class="secondary-button hidden">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
